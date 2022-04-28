@@ -1,0 +1,38 @@
+
+.btn-group{
+  background-color: #6c757d;
+  color: white;
+  margin-left: -2px;
+  border-color: #6c757d;
+  display: inline-block;
+}
+.btn-group:hover{
+  opacity: 0.9;
+  background-color: #434343;
+  color: white;
+  border-color: #434343;
+}
+
+
+.table-row-light {
+  background-color: #ffffff;
+}
+.table-row-dark {
+  background-color: #f0f0f0;
+}
+
+.search-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  label {
+    margin-right: 0.5rem;
+  }
+}
+
+.card-customer{
+  border-bottom-width:10px;
+}
+.colum-active {
+  background-color: #1890ff;
+}
