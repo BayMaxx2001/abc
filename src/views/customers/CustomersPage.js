@@ -11,7 +11,6 @@ import { GetCustomers } from '../../services/CustomerService';
 import { errorDialog } from '../../utils/modals';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-// import fakeData from './fakeData';
 
 const originColumns = {
   name: {
@@ -47,9 +46,10 @@ const CustomersPage = () => {
   const [totalColumn, setTotalColumn] = useState(4);
   const [ordering, setOrdering] = useState({
     orderingName: '',
-    sequence: '',
+    orderingSequence: '',
   });
   const typingTimeoutRef = useRef(null);
+
   const fetchAllCustomers = async (page) => {
     try {
       const offset = page * pagination.limit - pagination.limit;
@@ -77,24 +77,27 @@ const CustomersPage = () => {
       errorDialog('An error occurred. Please check again !');
     }
   };
+  // rerender when change visible columns
   useEffect(() => {
-    const keyValueArr = Object.entries(visibleColumns);
-    const keyArr = keyValueArr.reduce((acc, cur) => {
+    const visibleColumnsArr = Object.entries(visibleColumns);
+    const keyOfVisibleColumnsArr = visibleColumnsArr.reduce((resultArr, cur) => {
       const [key, value] = cur;
       if (value.isVisible === true) {
-        acc = [...acc, key];
+        resultArr = [...resultArr, key];
       }
-      return acc;
+      return resultArr;
     }, []);
-    setFilterColumns([...keyArr]);
+    setFilterColumns([...keyOfVisibleColumnsArr]);
   }, [visibleColumns, totalColumn]);
 
+  // rerender when change pagination
   useEffect(() => {
     if (!loading) {
       fetchAllCustomers(pagination.current_page);
     }
   }, []);
 
+  // rerender when search or sorted order
   useEffect(() => {
     if (!loading) {
       setPagination((pre) => ({ ...pre, current_page: 1 }));
@@ -102,27 +105,29 @@ const CustomersPage = () => {
     }
   }, [searchName, ordering]);
 
+  // handle change page
   const onChangePage = (e) => {
     if (!loading) {
       fetchAllCustomers(e);
     }
   };
 
+  // handle get input search
   const onChangeSearch = (e) => {
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
 
     typingTimeoutRef.current = setTimeout(() => {
-      console.log(e.target.value);
       setSearchName(e.target.value);
     }, 500);
   };
 
+  // handle change menu of Columns visibility
   const onClickMenuItems = async ({ key }) => {
     const cloneVisible = { ...visibleColumns };
     const keyValueArr = Object.entries(cloneVisible);
-    for (const [keyOfObject, valueOfObject] of keyValueArr) {
+    for (const [keyOfObject] of keyValueArr) {
       if (keyOfObject === key) {
         cloneVisible[key].isVisible = !cloneVisible[key].isVisible;
         if (cloneVisible[key].isVisible === true) {
@@ -134,13 +139,12 @@ const CustomersPage = () => {
     }
     setVisibleColumns({ ...cloneVisible });
   };
-
-  const handelClickSort = (newOrdering) => {
+  // handle click sort
+  const onClickSort = (newOrdering) => {
     if (newOrdering.orderingName === 'address') {
       newOrdering.orderingName = 'first_line';
     }
     setOrdering({ ...newOrdering });
-    console.log('newOrdering', newOrdering);
   };
 
   return (
@@ -195,20 +199,21 @@ const CustomersPage = () => {
                 {filterColumns.map((cur, index) => (
                   <div
                     // col-span-${visibleColumns[cur].weight}
+                    key={index}
                     className="col-span-1 flex whitespace-pre-wrap break-normal"
                   >
                     <p className="font-medium">{visibleColumns[cur].displayName}</p>
                     <div className="arrow-up-down">
                       <button
                         className={`arrow-up ${
-                          cur === ordering.orderingName && ordering.sequence === 'up'
+                          cur === ordering.orderingName && ordering.orderingSequence === 'up'
                             ? 'active-sort'
                             : 'deactive'
                         }`}
                         onClick={() => {
-                          handelClickSort({
+                          onClickSort({
                             orderingName: cur,
-                            sequence: 'up',
+                            orderingSequence: 'up',
                           });
                         }}
                       >
@@ -216,14 +221,14 @@ const CustomersPage = () => {
                       </button>
                       <button
                         className={`arrow-down ${
-                          cur === ordering.orderingName && ordering.sequence === 'down'
+                          cur === ordering.orderingName && ordering.orderingSequence === 'down'
                             ? 'active-sort'
                             : 'deactive'
                         }`}
                         onClick={() => {
-                          handelClickSort({
+                          onClickSort({
                             orderingName: cur,
-                            sequence: 'down',
+                            orderingSequence: 'down',
                           });
                         }}
                       >
