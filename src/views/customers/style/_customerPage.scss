@@ -1,0 +1,82 @@
+
+.btn-group{
+  background-color: #6c757d;
+  color: white;
+  margin-left: -2px;
+  border-color: #6c757d;
+  display: inline-block;
+}
+.btn-group:hover{
+  opacity: 0.9;
+  background-color: #434343;
+  color: white;
+  border-color: #434343;
+}
+
+
+.table-row-light {
+  background-color: #ffffff;
+}
+.table-row-dark {
+  background-color: #f0f0f0;
+}
+
+.search-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  label {
+    margin-right: 0.5rem;
+  }
+}
+
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+.card-customer{
+  border-bottom-width:10px;
+}
+.colum-active {
+  background-color: #1890ff;
+}
+
+.arrow-up-down{
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .arrow-up{
+    fontSize: 80%;
+    cursor: pointer;
+  }
+  .arrow-down{
+    fontSize: 80%;
+    cursor: pointer;
+  }
+}
+
+.border-left{
+
+}
+
+.active-sort{
+  color: black;
+}
+.deactive{
+  opacity: 0.6;
+}

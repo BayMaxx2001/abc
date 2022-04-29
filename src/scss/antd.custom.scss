@@ -1,0 +1,40 @@
+.ant-switch {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+.ant-switch-checked {
+  background-color: #1890ff !important;
+}
+
+.ant-btn-primary:not(.ant-btn-dangerous) {
+  background-color: #1890ff !important;
+
+  &:hover {
+    background-color: #40a9ff !important;
+  }
+}
+
+//.tab-full {
+//  .ant-tabs-content-holder {
+//    overflow-y: scroll;
+//
+//    &::-webkit-scrollbar {
+//      display: none;
+//    }
+//
+//    .ant-tabs-content {
+//      height: 100%;
+//    }
+//  }
+//}
+//
+//.ant-modal-confirm {
+//  .ant-modal-content {
+//    border-radius: 6px;
+//
+//    .ant-modal-confirm-btns {
+//      .ant-btn {
+//        border-radius: 6px;
+//      }
+//    }
+//  }
+//}
